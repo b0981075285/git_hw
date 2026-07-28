@@ -33,7 +33,7 @@ grep "ERROR" app.log
 你要把整個 `project` 資料夾打包並以 gzip 壓縮成一個 `.tar.gz` 檔案，應使用哪個工具？
 tar
 如果只想查看壓縮檔內容、不解開，`tar` 應使用代表「查看」的哪個參數？
-gzip
+tar -tzf
 ### 7. 遠端服務故障
 
 你需要依序確認：
@@ -54,18 +54,18 @@ nohup、tmux
 
 主機出現 `No space left on device`：
 
-1. 應先用什麼指令找出快滿的分區？
-2. 再用什麼指令找出占空間的資料夾？
-3. 若要搜尋大於 500MB 的檔案，應使用什麼指令？
+1. 應先用什麼指令找出快滿的分區？ df -h
+2. 再用什麼指令找出占空間的資料夾？ du -h --max-depth=1 ~ | sort -rh | head -n 5
+3. 若要搜尋大於 500MB 的檔案，應使用什麼指令？ find / -type f -size +500M
 
 ### 10. 服務無法啟動
 
 `nginx` 無法啟動。請說明你會依序使用哪些指令或工具來：
 
-1. 查看服務狀態
-2. 查看更完整的服務日誌
-3. 修正後重新啟動服務
-4. 確認 HTTP 是否恢復
+1. 查看服務狀態 sudo systemctl status nginx
+2. 查看更完整的服務日誌 sudo journalctl -u nginx -e --no-pager
+3. 修正後重新啟動服務 sudo systemctl restart nginx
+4. 確認 HTTP 是否恢復 curl -I
 
 ---
 
@@ -100,7 +100,7 @@ nohup、tmux
 
 ### 14. 加入群組
 
-要把 `alice` 加入 `project-team`，又不能移除她原本所屬的群組，正確指令是： C
+要把 `alice` 加入 `project-team`，又不能移除她原本所屬的群組，正確指令是： B
 
 - A. `usermod -G project-team alice`
 - B. `usermod -aG project-team alice`
@@ -163,7 +163,7 @@ nohup、tmux
 
 ### 21. Systemd 服務
 
-下列哪個敘述正確？ B
+下列哪個敘述正確？ A
 
 - A. `start` 只設定下次開機啟動
 - B. `enable` 一定會立即啟動服務
@@ -243,8 +243,8 @@ Cron 執行時的環境可能和一般登入終端機不同，因此腳本和重
 
 `systemctl enable nginx` 的主要作用是設定 nginx 開機自動啟動。
 
-- [ ] 正確
-- [。] 錯誤
+- [。] 正確
+- [] 錯誤
 
 ### 32.
 
@@ -257,5 +257,5 @@ Cron 執行時的環境可能和一般登入終端機不同，因此腳本和重
 
 Hard Link 與原檔名指向同一個 inode，因此刪除其中一個檔名後，另一個通常仍能讀取資料。
 
-- [ ] 正確
-- [。] 錯誤
+- [。] 正確
+- [] 錯誤
